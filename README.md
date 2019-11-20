@@ -4,6 +4,6 @@ Plan on 1000x800 canvas.
 
 Binaca is responsible for scenery and scrolling art. 
 Walden is doing obsticle mechanics
-Spencer is doing actual character car
+Spencer is doing the car class
 Raphael is doing collision mechanics and associated particle system and end screen
 
