@@ -2,19 +2,29 @@ var reverseMultipler = 1.7;
 var speed = 4;
 
 //TODO: populate this with the lanes within the art.
-var lanes = [1, 2, 3, 4, 5, 6];
+var lanes = [200, 2, 3, 4, 5, 6];
+
+setup(){
+    createCanvas(800, 800);
+
+}
+
+draw()
+{
+    
+}
 
 class Obstacle{
     constructor(laneVar){
         this.posY = 0;
         //dy per update cycle 
-        this.speed = 4
+        this.speed = 4;
         //The lane the car is in 1-6
         this.lane = laneVar;
         this.posX = lanes[lane + 1];
     }
 
-    update(){
+    this.update = function(){
         if (this.posY < 800 && !collison){
             this.posY += this.speed;
             draw(this.posX, this.posY);
@@ -24,8 +34,8 @@ class Obstacle{
 
     }
 
-    draw(x , y){
-        
+    this.draw = function(x , y){
+        rect(y , x - 25, 100, 50);
     }
 
 
