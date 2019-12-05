@@ -62,6 +62,62 @@ class Obstacle{
 
     }
 
+    car(x,y,col,cROT){
+    push();
+    translate(x,y);
+    rotate(cROT);
+    fill(col);
+    noStroke();
+
+    translate(-35,-70);
+    rect(0,0,70,140);
+    arc(35,0,70,40,PI,0);
+    arc(35,140,70,25,0,PI);
+
+    fill('Black');
+    //front window
+    beginShape();
+        vertex(8,20);
+        vertex(62,20);
+        vertex(55,40);
+        vertex(15,40);
+    endShape(CLOSE);
+
+    //back window
+    beginShape();
+        vertex(8,120);
+        vertex(8,110);
+        vertex(15,90);
+        vertex(55,90);
+        vertex(62,110);
+        vertex(62,120);
+    endShape(CLOSE);
+
+    //left side window
+    quad(8,25,15,45,15,85,8,105);
+
+    //right side window
+    quad(62,25,55,45,55,85,62,105);
+
+    //headlights
+    push();
+        fill('#F3E8EE');
+        translate(10,0);
+        rotate(-PI/6);
+        ellipse(0,0,14,6);
+    pop();
+
+    push();
+        fill('#F3E8EE');
+        translate(60,0);
+        rotate(PI/6);
+        ellipse(0,0,14,6);
+    pop();
+    pop();
+
+    
+}
+
     
 
 
