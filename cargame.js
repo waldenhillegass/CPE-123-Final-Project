@@ -198,7 +198,6 @@ class Obstacle{
         this.lanes = [100, 200, 300, 400, 500, 600];
         this.posX = midLane(this.lane + 1);
     }
-
     update(){
        // this.posX = lanes[this.lane];
         if (this.posY < 800 && !collison){
