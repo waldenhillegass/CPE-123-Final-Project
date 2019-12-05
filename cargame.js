@@ -50,7 +50,7 @@ function drawBackground()
     var DLx = width/14+((width-width/7)/6); //<-equation for lane line
     var DLy = 0;
     
-    console.log("line count ", dashedLineY);
+    //console.log("line count ", dashedLineY);
     
     for(i = 0; i < dashedLineY.length; i++){
         dashedLineY[i] += 5;
@@ -181,13 +181,25 @@ function keyPressed() {
 class Player {
     constructor() {
         this.lane = 1;
+        this.laneTarget = 1;
+        this.moveProgress = 1;
         this.x = midLane(1);
         this.y = 850;
         this.color = color("#F26359");
     }
 
-    getLane() {
-        return this.lane;
+    getLane() { // returns closest lane to the player as number 1-6
+        if (this.lane == this.laneTarget) {
+            return this.lane;
+        } else {
+            var distToLane = abs(this.x - midLane(this.lane));
+            var distToTarget = abs(this.x - midLane(this.laneTarget));
+            if (distToLane > distToTarget) {
+                return this.laneTarget;
+            } else {
+                return this.lane;
+            }
+        }
     }
 
     getCoords() {
@@ -195,25 +207,43 @@ class Player {
     }
 
     changeLane(moveRight) {
-        if (moveRight && this.lane < 6) {
-            this.lane++;
-        } else if (!moveRight && this.lane > 1) {
-            this.lane--;
+        if (moveRight && this.lane < 6 && this.moveProgress >= .9) {
+            this.laneTarget++;
+            this.moveProgress = 0;
+        } else if (!moveRight && this.lane > 1 && this.moveProgress >= .9) {
+            this.laneTarget--;
+            this.moveProgress = 0;
         }
-        this.x = midLane(this.lane);
     }
 
     keyPressHandler() {
-        if (keyCode == 37) { // left arrow key
+        if (keyCode == 65) { // a
             this.changeLane(false);
-        } else if (keyCode == 39) { // right arrow key
+        } else if (keyCode == 68) { // d
             this.changeLane(true);
         }
     }
 
     draw() {
         car(this.x, this.y, this.color, 0);
+        console.log(this.getLane());
+        this.update();
     }
+
+    update() {
+        if (this.moveProgress < .9) {
+            var startX = midLane(this.lane);
+            var endX = midLane(this.laneTarget);
+            var posChange = endX - startX;
+            var easedProgress = this.easeInOutCubic(this.moveProgress);
+            this.x = startX + posChange * easedProgress;
+            this.moveProgress += .04;
+        } else {
+            this.lane = this.laneTarget;
+        }
+    }
+
+    easeInOutCubic(t) { return t<.5 ? 4*t*t*t : (t-1)*(2*t-2)*(2*t-2)+1 } // source: https://gist.github.com/gre/1650294
 }
 
 
@@ -234,7 +264,7 @@ class Obstacle{
         if (this.posY < 800 && !collison){
             this.posY += this.speed;
             this.posX = midLane(this.lane + 1);
-            console.log("this lane ", this.lane);
+            //console.log("this lane ", this.lane);
             this.car(this.posX, this.posY, color('#896279'), this.rotate);
             
         }else{
