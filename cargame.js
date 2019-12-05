@@ -1,15 +1,19 @@
 
+var player;
 function setup ()
 {
     createCanvas(800,1000);
     background('#729B79'); //green grass background
+
+    player = new Player();
 }
 
 function draw()
 {
     drawBackground();
 
-    car(midLane(6),850,color('#AD7A99'),0); //PI=down, 0=up
+    //car(midLane(6),850,color('#AD7A99'),0); //PI=down, 0=up
+    player.draw();
 }
 
 function drawBackground()
@@ -120,3 +124,48 @@ function midLane(lanenum)
     return res;
 }
 
+
+function keyPressed() {
+    console.log("Key pressed: "  + keyCode);
+    player.keyPressHandler();
+}
+
+
+
+class Player {
+    constructor() {
+        this.lane = 1;
+        this.x = midLane(1);
+        this.y = 850;
+        this.color = color("#F26359");
+    }
+
+    getLane() {
+        return this.lane;
+    }
+
+    getCoords() {
+        return [this.x, this.y];
+    }
+
+    changeLane(moveRight) {
+        if (moveRight && this.lane < 6) {
+            this.lane++;
+        } else if (!moveRight && this.lane > 1) {
+            this.lane--;
+        }
+        this.x = midLane(this.lane);
+    }
+
+    keyPressHandler() {
+        if (keyCode == 37) { // left arrow key
+            this.changeLane(false);
+        } else if (keyCode == 39) { // right arrow key
+            this.changeLane(true);
+        }
+    }
+
+    draw() {
+        car(this.x, this.y, this.color, 0);
+    }
+}
