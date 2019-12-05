@@ -1,53 +1,78 @@
 var reverseMultipler = 1.7;
 var speed = 4;
+var obstacles = [];
+collison = false;
+obstacleCount = 6
 
 //TODO: populate this with the lanes within the art.
-var lanes = [200, 2, 3, 4, 5, 6];
+var lanesArr = [100, 200, 300, 400, 500, 600];
 
-setup(){
-    createCanvas(800, 800);
+function setup() {
+    createCanvas(1000, 800);
+    for(i = 0; i < obstacleCount; i++){
+        obstacles.push(new Obstacle(i));
+    }
 
 }
 
-draw()
+function draw()
 {
-    
+    background(255);
+    for(i = 0; i < obstacleCount; i++){
+        obstacles[i].update();
+        console.log("updating index:" , i);
+         
+    }
 }
 
 class Obstacle{
     constructor(laneVar){
-        this.posY = 0;
+        this.posY = random(0, -1000);
         //dy per update cycle 
         this.speed = 4;
         //The lane the car is in 1-6
         this.lane = laneVar;
-        this.posX = lanes[lane + 1];
+       
+        this.rotate = 0;
+        this.lanes = [100, 200, 300, 400, 500, 600];
+        this.posX = this.lanes[this.lane];
     }
 
-    this.update = function(){
+    update(){
+       // this.posX = lanes[this.lane];
         if (this.posY < 800 && !collison){
             this.posY += this.speed;
-            draw(this.posX, this.posY);
+            this.posX = this.lanes[this.lane];
+            console.log("this lane ", this.lane);
+            this.car(this.posX, this.posY, color('#896279'), this.rotate);
+            
         }else{
-            //TODO figure out how to destroy this object.
+          this.posY = random(0 , -1000);
+          this.lane = Math.floor(5 * random());
+          
+          
+        }
+        if (this.lane < 3){
+            this.rotate = PI;
+            this.speed = 7;
+        } else {
+            this.speed = 3;
+            this.rotate = 0;
         }
 
     }
 
-    this.draw = function(x , y){
-        rect(y , x - 25, 100, 50);
-    }
+    
 
 
 
 
         //if the lane is one of the three left lanes speed it up since it is oncoming traffic
         
-        }
-    }
+        
+}
 
     
-    }
 
 
-}
+
