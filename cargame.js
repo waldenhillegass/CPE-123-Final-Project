@@ -43,7 +43,7 @@ function drawBackground()
     line(width/2,0,width/2,height); 
 
     //side lines
-    stroke('#CB904D');
+    stroke('#F4D058');
     strokeWeight(7);
     line(71,0,71,height);
     line(width-71,0,width-71,height);
@@ -119,4 +119,6 @@ function midLane(lanenum)
 
     return res;
 }
+
+// red color: F26359
 
