@@ -47,16 +47,20 @@ function drawBackground()
 
 //lane lines
     //all dashed lines
-    var DLx = width/14+((width-width/7)/6); //<-equation for lane line
+    //<-equation for lane line
     var DLy = 0;
     
-    console.log("line count ", dashedLineY);
-    
+    //
+    //console.log("lines ", dashedLineY);
+
     for(i = 0; i < dashedLineY.length; i++){
+        var DLx = width/14+((width-width/7)/6);
+        //console.log("i is " , i);
         dashedLineY[i] += 5;
         if(dashedLineY[i] > height){
             dashedLineY[i] = 0;
         }
+        
         for(n = 0; n < 5; n++){
             dashedLines(DLx, dashedLineY[i]);
             DLx += (width-width/7)/6;
@@ -172,7 +176,8 @@ function midLane(lanenum)
 
 
 function keyPressed() {
-    console.log("Key pressed: "  + keyCode);
+    //
+    //console.log("Key pressed: "  + keyCode);
     player.keyPressHandler();
 }
 
@@ -224,22 +229,24 @@ class Obstacle{
         this.speed = 4;
         //The lane the car is in 1-6
         this.lane = laneVar;
-       
+        this.color = color(random(255), random(255), random(255));
         this.rotate = 0;
         this.lanes = [100, 200, 300, 400, 500, 600];
         this.posX = midLane(this.lane + 1);
     }
     update(){
        // this.posX = lanes[this.lane];
-        if (this.posY < 800 && !collison){
+        if (this.posY < height && !collison){
             this.posY += this.speed;
             this.posX = midLane(this.lane + 1);
-            console.log("this lane ", this.lane);
-            this.car(this.posX, this.posY, color('#896279'), this.rotate);
+            //console.log("this lane ", this.lane);
+            this.car(this.posX, this.posY, this.color, this.rotate);
             
         }else{
+            //This code runs when car is off the screen
           this.posY = random(0 , -1000);
-          this.lane = Math.floor(5 * random());
+          this.color = color(random(255), random(255), random(255));
+          //this.lane = Math.floor(5 * random());
           
           
         }
