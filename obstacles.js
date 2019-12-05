@@ -1,5 +1,4 @@
-var reverseMultipler = 1.7;
-var speed = 4;
+
 var obstacles = [];
 collison = false;
 obstacleCount = 6
