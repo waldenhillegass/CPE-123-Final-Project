@@ -21,6 +21,7 @@ function setup ()
     }
 
     player = new Player();
+    checkForCollisions();
 
 }
 
@@ -36,6 +37,7 @@ function draw()
         //console.log("updating index:" , i);
          
     }
+    
 }
 
 function drawBackground()
@@ -46,17 +48,14 @@ function drawBackground()
     rect(width/14,0,width-width/7,height);
 
 //lane lines
-    //all dashed lines
-    var DLx = width/14+((width-width/7)/6); //<-equation for lane line
-    var DLy = 0;
-    
-    //console.log("line count ", dashedLineY);
-    
     for(i = 0; i < dashedLineY.length; i++){
+        var DLx = width/14+((width-width/7)/6);
+        //console.log("i is " , i);
         dashedLineY[i] += 5;
         if(dashedLineY[i] > height){
             dashedLineY[i] = 0;
         }
+        
         for(n = 0; n < 5; n++){
             dashedLines(DLx, dashedLineY[i]);
             DLx += (width-width/7)/6;
@@ -65,22 +64,6 @@ function drawBackground()
 
     }
 
-
-    
-    /*
-    while (DLy < height)
-    {
-        dashedLines(DLx,DLy);
-        DLy +=150;
-        i
-        if (DLy >= height && DLx < width-(2*width-width/7)/6)
-        {
-           DLy = 0;
-            DLx += (width-width/7)/6; //<-divides the road part into the 6 lanes
-        }
-
-    }
-    */
     
     
     //middle line
@@ -172,7 +155,8 @@ function midLane(lanenum)
 
 
 function keyPressed() {
-    console.log("Key pressed: "  + keyCode);
+    //
+    //console.log("Key pressed: "  + keyCode);
     player.keyPressHandler();
 }
 
@@ -254,22 +238,24 @@ class Obstacle{
         this.speed = 4;
         //The lane the car is in 1-6
         this.lane = laneVar;
-       
+        this.color = color(random(255), random(255), random(255));
         this.rotate = 0;
         this.lanes = [100, 200, 300, 400, 500, 600];
         this.posX = midLane(this.lane + 1);
     }
     update(){
        // this.posX = lanes[this.lane];
-        if (this.posY < 800 && !collison){
+        if (this.posY < height && !collison){
             this.posY += this.speed;
             this.posX = midLane(this.lane + 1);
             //console.log("this lane ", this.lane);
-            this.car(this.posX, this.posY, color('#896279'), this.rotate);
+            this.car(this.posX, this.posY, this.color, this.rotate);
             
         }else{
+            //This code runs when car is off the screen
           this.posY = random(0 , -1000);
-          this.lane = Math.floor(5 * random());
+          this.color = color(random(255), random(255), random(255));
+          //this.lane = Math.floor(5 * random());
           
           
         }
@@ -338,4 +324,15 @@ class Obstacle{
 
     
 }
+}
+
+function checkForCollisions(){
+    isCollison = false;
+    for(i = 0; obstacles.length; i++){
+        if((player.getLane() == obstacles[i].lane + 1 )&& (Math.abs(player.getCoords()[0] - obstacles[i].posX) < 50)){
+            isCollison = true;
+            return true;
+        }
+    }
+    return false;
 }
