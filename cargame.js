@@ -3,6 +3,7 @@ var player;
 var obstacles = [];
 collison = false;
 obstacleCount = 6
+var dashedLineY = [];
 
 
 function setup ()
@@ -14,7 +15,13 @@ function setup ()
     for(i = 0; i < obstacleCount; i++){
         obstacles.push(new Obstacle(i));
     }
+
+    for (i = 0; i < height; i += 150){
+        dashedLineY.push(i);
+    }
+
     player = new Player();
+
 }
 
 function draw()
@@ -42,12 +49,30 @@ function drawBackground()
     //all dashed lines
     var DLx = width/14+((width-width/7)/6); //<-equation for lane line
     var DLy = 0;
+    
+    console.log("line count ", dashedLineY);
+    
+    for(i = 0; i < dashedLineY.length; i++){
+        dashedLineY[i] += 5;
+        if(dashedLineY[i] > height){
+            dashedLineY[i] = 0;
+        }
+        for(n = 0; n < 5; n++){
+            dashedLines(DLx, dashedLineY[i]);
+            DLx += (width-width/7)/6;
+            
+        }
 
+    }
+
+
+    
+    /*
     while (DLy < height)
     {
         dashedLines(DLx,DLy);
         DLy +=150;
-
+        i
         if (DLy >= height && DLx < width-(2*width-width/7)/6)
         {
            DLy = 0;
@@ -55,7 +80,9 @@ function drawBackground()
         }
 
     }
-
+    */
+    
+    
     //middle line
     stroke('#F3E8EE');
     strokeWeight(10);
@@ -79,7 +106,8 @@ function dashedLines(x,y)
 }
 
 function car(x,y,col,cROT)
-{
+{   
+    push();
     translate(x,y);
     rotate(cROT);
     fill(col);
@@ -128,6 +156,7 @@ function car(x,y,col,cROT)
         translate(60,0);
         rotate(PI/6);
         ellipse(0,0,14,6);
+    pop();
     pop();
     
 }
