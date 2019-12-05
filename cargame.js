@@ -21,6 +21,7 @@ function setup ()
     }
 
     player = new Player();
+    checkForCollisions();
 
 }
 
@@ -36,6 +37,7 @@ function draw()
         //console.log("updating index:" , i);
          
     }
+    
 }
 
 function drawBackground()
@@ -46,13 +48,6 @@ function drawBackground()
     rect(width/14,0,width-width/7,height);
 
 //lane lines
-    //all dashed lines
-    //<-equation for lane line
-    var DLy = 0;
-    
-    //
-    //console.log("lines ", dashedLineY);
-
     for(i = 0; i < dashedLineY.length; i++){
         var DLx = width/14+((width-width/7)/6);
         //console.log("i is " , i);
@@ -69,22 +64,6 @@ function drawBackground()
 
     }
 
-
-    
-    /*
-    while (DLy < height)
-    {
-        dashedLines(DLx,DLy);
-        DLy +=150;
-        i
-        if (DLy >= height && DLx < width-(2*width-width/7)/6)
-        {
-           DLy = 0;
-            DLx += (width-width/7)/6; //<-divides the road part into the 6 lanes
-        }
-
-    }
-    */
     
     
     //middle line
@@ -315,4 +294,15 @@ class Obstacle{
 
     
 }
+}
+
+function checkForCollisions(){
+    isCollison = false;
+    for(i = 0; obstacles.length; i++){
+        if((player.getLane() == obstacles[i].lane + 1 )&& (Math.abs(player.getCoords()[0] - obstacles[i].posX) < 50)){
+            isCollison = true;
+            return true;
+        }
+    }
+    return false;
 }
