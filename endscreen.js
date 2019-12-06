@@ -14,7 +14,7 @@ function setup() {
       textAlign(CENTER, CENTER);
       text('Try Again?', width/2, 645);
     
-    //mountain shadow
+    //mountain shadow ddd
     fill(0);
     beginShape();
       vertex(172, 460);
