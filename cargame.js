@@ -4,6 +4,7 @@ var obstacles = [];
 collison = false;
 obstacleCount = 6
 var dashedLineY = [];
+score = 0;
 
 
 function setup ()
@@ -37,7 +38,10 @@ function draw()
         //console.log("updating index:" , i);
          
     }
-    
+    updateScore();
+    printScore();
+    checkForCollisions();
+
 }
 
 function drawBackground()
@@ -51,9 +55,12 @@ function drawBackground()
     for(i = 0; i < dashedLineY.length; i++){
         var DLx = width/14+((width-width/7)/6);
         //console.log("i is " , i);
-        dashedLineY[i] += 5;
+
+        if(!collison){
+            dashedLineY[i] += 5;
+        }
         if(dashedLineY[i] > height){
-            dashedLineY[i] = 0;
+            dashedLineY[i] = -100;
         }
         
         for(n = 0; n < 5; n++){
@@ -245,8 +252,10 @@ class Obstacle{
     }
     update(){
        // this.posX = lanes[this.lane];
-        if (this.posY < height && !collison){
-            this.posY += this.speed;
+        if (this.posY < height){
+            if(!collison){
+                this.posY += this.speed;
+            }
             this.posX = midLane(this.lane + 1);
             //console.log("this lane ", this.lane);
             this.car(this.posX, this.posY, this.color, this.rotate);
@@ -328,11 +337,29 @@ class Obstacle{
 
 function checkForCollisions(){
     isCollison = false;
-    for(i = 0; obstacles.length; i++){
-        if((player.getLane() == obstacles[i].lane + 1 )&& (Math.abs(player.getCoords()[0] - obstacles[i].posX) < 50)){
-            isCollison = true;
+    for(i = 0; i < obstacles.length; i++){
+        //console.log("Stuff :", Math.abs(player.getCoords()[1] - obstacles[i].posY));
+        if((player.getLane() == obstacles[i].lane + 1 )&& (Math.abs(player.getCoords()[1] - obstacles[i].posY) < 150)){
+            collison = true;
             return true;
         }
     }
     return false;
+}
+
+function updateScore(){
+    if(!collison){
+        if(player.getLane() <= 3){
+            score += 2;
+        }else{
+            score += 1;
+        }
+    }
+}
+
+function printScore(){
+    fill(255);
+    noStroke();
+    textSize(33);
+    text("Score : " + score, 100,100);
 }
