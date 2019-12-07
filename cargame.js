@@ -240,6 +240,14 @@ function drawEndScreen() {
     text('NAME', 370, 703);
     text('SCORE', 533, 703);
   pop();
+
+  //add name message
+  push();
+  textSize(15);
+  fill('#494740');
+    textAlign(CENTER, CENTER);
+    text('Add your score by typing your name at the top of the page!', width/2, 950);
+  pop();
 }
 
 function drawOpeningScreen() {
