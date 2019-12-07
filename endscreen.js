@@ -5,16 +5,21 @@ function setup() {
 function draw() {
   background('#F3E8EE');
   
-  //start button
+  //try again button
+  push();
   fill(255);
+  strokeWeight(3);
   rectMode(CENTER);
-    rect(width/2, 642, 180, 50);
+    rect(width/2, 80, 180, 50);
   textSize(30);
+  textStyle(BOLD);
   fill(0);
     textAlign(CENTER, CENTER);
-    text('Try Again?', width/2, 645);
+    text('Try Again?', width/2, 83);
+  pop();
   
   //mountain shadow
+  push();
   fill(0);
   beginShape();
     vertex(172, 460);
@@ -60,18 +65,75 @@ function draw() {
     rect(483, 430, 15, 6);
     rect(523, 430, 15, 6);
     rect(563, 430, 15, 6);
+  pop();
   
   //title
+  push();
   textSize(70);
   textStyle(BOLD);
   fill('#65BB60');
     textAlign(CENTER, CENTER);
     text('YOU SUCK!', width/2, 510);
+  pop();
   
   //final score
+  push();
   textSize(50);
   textStyle(BOLD);
   fill(0);
     textAlign(CENTER, CENTER);
     text('score', width/2, 380);
+  pop();
+  
+  push();
+  translate(0, -50);
+  //leaderboard
+  push();
+  textSize(40);
+  textStyle(BOLD);
+  fill(0);
+    textAlign(CENTER, CENTER);
+    text('Leaderboard', width/2, 650);
+  pop();
+  //chart
+  push();
+  fill(255);
+  stroke(0);
+  strokeWeight(3);
+  rectMode(CENTER);
+    rect(width/2, 700, width/2, 50);
+    rect(width/2, 750, width/2, 50);
+    rect(width/2, 800, width/2, 50);
+    rect(width/2, 850, width/2, 50);
+    rect(width/2, 900, width/2, 50);
+    rect(width/2, 950, width/2, 50);
+  pop();
+  //places
+  push();
+  fill(0);
+  noStroke();
+  textSize(30);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
+    text('1', 222, 752);
+    text('2', 222, 802);
+    text('3', 222, 852);
+    text('4', 222, 902);
+    text('5', 222, 952);
+  pop();
+  //column titles
+  fill(0);
+  noStroke();
+  strokeWeight(4);
+  textSize(30);
+  textStyle(BOLD);
+  textAlign(CENTER, CENTER);
+    text('NAME', 370, 703);
+    text('SCORE', 533, 703);
+  pop();
+  
+  //names
+  
+  
+  //scores
 }
