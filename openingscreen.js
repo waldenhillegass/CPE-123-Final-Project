@@ -7,16 +7,19 @@ function setup() {
     
     //start button
     push();
-    fill(255);
+    noFill();
+    stroke('#494740');
     strokeWeight(3);
       quad(347, 613, 454, 613, 454, 659, 347, 659);
     textSize(30);
-    fill(0);
-      text('Start', 366, 645);
+    fill('#494740');
+    noStroke();
+    textFont('Arial Narrow');
+      text('Start', 370, 645);
     pop();
     
     //mountain shadow
-    fill(0);
+    fill('#494740');
     beginShape();
       vertex(172, 460);
       vertex(172, 460);
@@ -48,7 +51,8 @@ function setup() {
       vertex(183, 451);
     endShape();
     //street
-    fill(0);
+    fill('#494740');
+    noStroke();
       quad(198, 405, 605, 405, 624, 455, 179, 455);
     fill(255);
       rect(203, 430, 15, 6);
@@ -64,9 +68,10 @@ function setup() {
     
     //title
     textSize(70);
+    textFont('Arial Black');
     textStyle(BOLD);
-    fill('#65BB60');
-      text('CAR GAME', 214, 530);
+    fill('#729B79');
+      text('CAR GAME', 190, 530);
     
     //car
     push();
