@@ -10,7 +10,6 @@
         <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.5.2/firebase-firestore.js"></script>
         <script language="javascript" type="text/javascript" src="databaseAdmin.js"></script>
-  
         CPE 123 - Computational Art Labs<br>
         Project 4: Car Game
     </p>
@@ -18,13 +17,17 @@
         <a href="index.html">Back to start page</a>
     </p>
 
+    <input type="text" placeholder="Score" id="score" />
+    <button onclick="getScores()">get scores</button>
+    <button onclick="showNameDialog()">show dialog</button>
+
+    <p id="scores"></p>
+
     <p id="nameDialog" style="display:none;">
         <input type="text" placeholder="Your Name" id = "name" />
         Your Score: <span id="scoreInput"></span>
         <button onclick="addScore()">Submit</button>
     </p>
-
-    <script language="javascript" type="text/javascript" src="cargame.js"></script><p>
 
 
     <style> body {padding: 0; margin: 20;} </style>
