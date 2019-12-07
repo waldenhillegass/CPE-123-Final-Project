@@ -7,20 +7,23 @@ function draw() {
   
   //try again button
   push();
-  fill(255);
+  noFill();
+  stroke('#494740');
   strokeWeight(3);
   rectMode(CENTER);
-    rect(width/2, 80, 180, 50);
+    rect(width/2, 82, 180, 50);
   textSize(30);
   textStyle(BOLD);
-  fill(0);
+  fill('#494740');
+  noStroke();
     textAlign(CENTER, CENTER);
-    text('Try Again?', width/2, 83);
+    text('Try Again?', width/2, 85);
   pop();
   
   //mountain shadow
   push();
-  fill(0);
+  fill('#494740');
+  noStroke();
   beginShape();
     vertex(172, 460);
     vertex(172, 460);
@@ -52,7 +55,8 @@ function draw() {
     vertex(183, 451);
   endShape();
   //street
-  fill(0);
+  fill('#494740');
+  noStroke();
     quad(198, 405, 605, 405, 624, 455, 179, 455);
   fill(255);
     rect(203, 430, 15, 6);
@@ -71,7 +75,8 @@ function draw() {
   push();
   textSize(70);
   textStyle(BOLD);
-  fill('#65BB60');
+  textFont('Arial Black');
+  fill('#729B79');
     textAlign(CENTER, CENTER);
     text('YOU SUCK!', width/2, 510);
   pop();
@@ -80,7 +85,7 @@ function draw() {
   push();
   textSize(50);
   textStyle(BOLD);
-  fill(0);
+  fill('#729B79');
     textAlign(CENTER, CENTER);
     text('score', width/2, 380);
   pop();
@@ -91,14 +96,14 @@ function draw() {
   push();
   textSize(40);
   textStyle(BOLD);
-  fill(0);
+  fill('#494740');
     textAlign(CENTER, CENTER);
     text('Leaderboard', width/2, 650);
   pop();
   //chart
   push();
-  fill(255);
-  stroke(0);
+  noFill();
+  stroke('#494740');
   strokeWeight(3);
   rectMode(CENTER);
     rect(width/2, 700, width/2, 50);
@@ -110,7 +115,7 @@ function draw() {
   pop();
   //places
   push();
-  fill(0);
+  fill('#494740');
   noStroke();
   textSize(30);
   textStyle(BOLD);
@@ -122,7 +127,7 @@ function draw() {
     text('5', 222, 952);
   pop();
   //column titles
-  fill(0);
+  fill('#494740');
   noStroke();
   strokeWeight(4);
   textSize(30);
@@ -137,3 +142,12 @@ function draw() {
   
   //scores
 }
+
+/*
+colors:
+
+black : ('#494740')
+white : ('#F3E8EE')
+green : ('#729B79')
+
+*/
